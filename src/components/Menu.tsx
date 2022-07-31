@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Menu() {
   return (
@@ -9,10 +10,14 @@ function Menu() {
       <div className="position-sticky pt-3 sidebar-sticky">
         <ul className="nav flex-column">
           <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="#">
+            <NavLink
+              to={"/users"}
+              className="nav-link active"
+              aria-current="page"
+            >
               <span data-feather="home" className="align-text-bottom"></span>
-              Dashboard
-            </a>
+              Users
+            </NavLink>
           </li>
         </ul>
       </div>

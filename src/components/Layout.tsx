@@ -31,13 +31,10 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div>
       <Nav user={user} />
-
       <div className="container-fluid">
         <div className="row">
           <Menu />
-
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <h2>Section title</h2>
             <div className="table-responsive">{children}</div>
           </main>
         </div>
