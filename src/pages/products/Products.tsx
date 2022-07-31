@@ -11,6 +11,7 @@ import {
   TablePagination,
   Box,
   Button,
+  ToggleButtonGroup,
 } from "@mui/material";
 import axios from "axios";
 
@@ -36,6 +37,11 @@ function Products() {
 
   return (
     <Layout>
+      <div className="pt-3 pb-2 mb-3 border-bottom">
+        <Button href={"/products/create"} variant="contained" color="primary">
+          Add
+        </Button>
+      </div>
       <Table>
         <TableHead>
           <TableRow>
@@ -55,19 +61,33 @@ function Products() {
                 <TableRow key={index}>
                   <TableCell>{product.id}</TableCell>
                   <TableCell>
-                    <Box component="img" src={product.image} />
+                    <Box
+                      component="img"
+                      src={product.image}
+                      width={48}
+                      height={48}
+                    />
                   </TableCell>
                   <TableCell>{product.title}</TableCell>
                   <TableCell>{product.description}</TableCell>
                   <TableCell>${product.price}</TableCell>
                   <TableCell>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => handleDeleteProduct(product.id)}
-                    >
-                      Delete
-                    </Button>
+                    <ToggleButtonGroup>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        href={`products/${product.id}/edit`}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => handleDeleteProduct(product.id)}
+                      >
+                        Delete
+                      </Button>
+                    </ToggleButtonGroup>
                   </TableCell>
                 </TableRow>
               );
