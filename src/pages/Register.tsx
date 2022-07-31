@@ -1,6 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+import "./Login.css";
 
 interface formProps {
   firstName: string;
@@ -30,16 +31,13 @@ function Register() {
   const handleFormSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/admin/register",
-        {
-          first_name: form.firstName.trim(),
-          last_name: form.lastName.trim(),
-          email: form.email.trim(),
-          password: form.password,
-          password_confirm: form.passwordConfirm,
-        }
-      );
+      const response = await axios.post("register", {
+        first_name: form.firstName.trim(),
+        last_name: form.lastName.trim(),
+        email: form.email.trim(),
+        password: form.password,
+        password_confirm: form.passwordConfirm,
+      });
       if (response) {
         setRedirect(true);
       }
