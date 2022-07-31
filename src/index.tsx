@@ -7,6 +7,7 @@ import axios from "axios";
 
 // base url
 axios.defaults.baseURL = "http://localhost:8000/api/admin/";
+axios.defaults.withCredentials = true; // cookie with jwt (get & use)
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

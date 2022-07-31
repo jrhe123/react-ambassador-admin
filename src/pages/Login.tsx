@@ -25,14 +25,10 @@ function Login() {
   const handleFormSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "login",
-        {
-          email: form.email.trim(),
-          password: form.password,
-        },
-        { withCredentials: true } // retrieve cookie from backend
-      );
+      const response = await axios.post("login", {
+        email: form.email.trim(),
+        password: form.password,
+      });
       if (response) {
         setRedirect(true);
       }
