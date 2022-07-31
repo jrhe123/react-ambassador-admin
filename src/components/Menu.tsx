@@ -19,6 +19,16 @@ function Menu() {
               Users
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink
+              to={"/products"}
+              className="nav-link active"
+              aria-current="page"
+            >
+              <span data-feather="home" className="align-text-bottom"></span>
+              Products
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>
