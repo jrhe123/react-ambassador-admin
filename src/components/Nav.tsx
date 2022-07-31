@@ -15,12 +15,18 @@ function Nav({ user }: { user: User | null }) {
 
       <div className="navbar-nav">
         <div className="nav-item">
-          <Link className="nav-link px-3" to={"/profile"}>
-            {user?.first_name} {user?.last_name}
-          </Link>
-          <Link className="nav-link px-3" to={"/login"} onClick={handleLogout}>
-            Sign out
-          </Link>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <Link className="nav-link px-3" to={"/profile"}>
+              {user?.first_name} {user?.last_name}
+            </Link>
+            <Link
+              className="nav-link px-3"
+              to={"/login"}
+              onClick={handleLogout}
+            >
+              Sign out
+            </Link>
+          </div>
         </div>
       </div>
     </header>
