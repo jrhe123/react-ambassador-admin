@@ -1,7 +1,16 @@
-import React, { SyntheticEvent, useState, useEffect } from "react";
+import React, {
+  SyntheticEvent,
+  useState,
+  useEffect,
+  Dispatch,
+  FC,
+} from "react";
 import { TextField, Button } from "@mui/material";
 import Layout from "../components/Layout";
 import axios from "axios";
+import { User } from "../models/user";
+import { connect } from "react-redux";
+import { setUser } from "../redux/actions/setUserAction";
 
 interface infoFormProps {
   firstName: string;
@@ -14,7 +23,18 @@ interface pwdFormProps {
   passwordConfirm: string;
 }
 
-function Profile() {
+interface ProfileProps {
+  user: User;
+  setUserDispatch: (user: User) => void;
+}
+
+const Profile: FC<ProfileProps> = ({
+  user,
+  setUserDispatch,
+}: {
+  user: User;
+  setUserDispatch: (user: User) => void;
+}) => {
   const [infoForm, setInfoForm] = useState<infoFormProps>({
     firstName: "",
     lastName: "",
@@ -26,16 +46,14 @@ function Profile() {
   });
 
   useEffect(() => {
-    (async () => {
-      const response = await axios.get("user");
-      const data = response.data;
+    if (user) {
       setInfoForm({
-        firstName: data.first_name,
-        lastName: data.last_name,
-        email: data.email,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        email: user.email,
       });
-    })();
-  }, []);
+    }
+  }, [user]);
 
   const handleInfoFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInfoForm({
@@ -53,11 +71,13 @@ function Profile() {
 
   const handleSubmitInfoForm = async (e: SyntheticEvent) => {
     e.preventDefault();
-    await axios.put("users/info", {
+    const response = await axios.put("users/info", {
       first_name: infoForm.firstName,
       last_name: infoForm.lastName,
       email: infoForm.email,
     });
+    const data = response.data;
+    setUserDispatch(data);
   };
 
   const handleSubmitPwdForm = async (e: SyntheticEvent) => {
@@ -131,6 +151,14 @@ function Profile() {
       </form>
     </Layout>
   );
-}
+};
 
-export default Profile;
+const mapStateToProps = (state: { user: User }) => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+  setUserDispatch: (user: User) => dispatch(setUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

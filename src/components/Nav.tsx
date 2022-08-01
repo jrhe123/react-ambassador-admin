@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Dispatch } from "react";
 import { Link } from "react-router-dom";
 import { User } from "../models/user";
+import { connect } from "react-redux";
 import axios from "axios";
 
 function Nav({ user }: { user: User | null }) {
@@ -33,4 +34,10 @@ function Nav({ user }: { user: User | null }) {
   );
 }
 
-export default Nav;
+const mapStateToProps = (state: { user: User }) => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);
