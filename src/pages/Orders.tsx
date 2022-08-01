@@ -10,8 +10,6 @@ import {
   TableRow,
   TableBody,
   TableCell,
-  TableFooter,
-  TablePagination,
 } from "@mui/material";
 import axios from "axios";
 

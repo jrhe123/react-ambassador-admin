@@ -22,7 +22,6 @@ function Users() {
   useEffect(() => {
     (async () => {
       const response = await axios.get("ambassadors");
-      console.log("response: ", response);
       setUsers(response.data);
     })();
   }, []);
